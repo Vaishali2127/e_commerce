@@ -9,14 +9,14 @@ const products = [
     name: "Shoes",
     description: "Running Shoes",
     price: "$5",
-    image: "/src/assets/shoes.jpg",
+    image: "../../shoes.jpg",
   },
   {
     id: 2,
     name: "Macbook",
     description: "Apple Macbook",
     price: "$10",
-    image: "/src/assets/shoes.jpg",
+    image: "../../shoes.jpg",
   },
 ];
 
