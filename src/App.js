@@ -1,7 +1,9 @@
+import Products from "./components/Products/Products";
+
 function App() {
   return (
     <div className="App">
-      <h1>hi there</h1>
+      <Products />
     </div>
   );
 }
