@@ -2,15 +2,17 @@ import React from "react";
 import { Container, Typography, Grid, Button } from "@material-ui/core";
 import useStyles from "./styles";
 import CartItem from "./CartItem/CartItem";
+import { Link } from "react-router-dom";
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, handleEmptyCart }) => {
   const classes = useStyles();
-
-  //   const isEmpty = !cart.line_items.lenth;
 
   const EmptyCart = () => (
     <Typography variant="subtitle1">
       You have no items in your shopping cart , start adding some!
+      <Link to="/" className={classes.link}>
+        Start adding some
+      </Link>
     </Typography>
   );
 
@@ -20,7 +22,11 @@ const Cart = ({ cart }) => {
         {cart.line_items.map((item) => (
           <Grid item xs={12} sm={4} key={item.id}>
             {/* <div>{item.name}</div> */}
-            <CartItem item={item} />
+            <CartItem
+              item={item}
+              onUpdateCartQty={onUpdateCartQty}
+              onRemoveFromCart={onRemoveFromCart}
+            />
           </Grid>
         ))}
       </Grid>
@@ -36,6 +42,7 @@ const Cart = ({ cart }) => {
             type="button"
             variant="contained"
             color="secondary"
+            onClick={handleEmptyCart}
           >
             Empty Cart
           </Button>
@@ -61,7 +68,7 @@ const Cart = ({ cart }) => {
       <Typography className={classes.title} variant="h3" gutterBottom>
         Your Shopping Cart
       </Typography>
-      {!cart.line_items.lenth ? <EmptyCart /> : <FilledCart />}
+      {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
     </Container>
   );
 };

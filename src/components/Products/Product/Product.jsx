@@ -13,11 +13,12 @@ import useStyles from "./styles";
 const Product = ({ product, onAddToCart }) => {
   const classes = useStyles();
 
+  console.log(product);
   return (
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={product.image.source}
+        image={product.image.url}
         title={product.name}
       />
       <CardContent>
@@ -35,7 +36,7 @@ const Product = ({ product, onAddToCart }) => {
           color="textSecondary"
         />
       </CardContent>
-      <CardActions disableSpacing className={classes.cardAction}>
+      <CardActions disableSpacing className={classes.cardActions}>
         <IconButton
           aria-label="Add to Cart"
           onClick={() => onAddToCart(product.id, 1)}
