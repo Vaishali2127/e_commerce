@@ -11,7 +11,7 @@ export default makeStyles(() => ({
   cartActions: {
     justifyContent: "space-between",
   },
-  buttons: {
+  button: {
     display: "flex",
     alignItems: "center",
   },
