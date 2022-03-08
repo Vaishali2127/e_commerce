@@ -10,7 +10,6 @@ import {
   Divider,
   Button,
 } from "@material-ui/core";
-
 import { Link, useHistory } from "react-router-dom";
 
 import { commerce } from "../../../lib/commerce";
@@ -37,9 +36,9 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
           const token = await commerce.checkout.generateToken(cart.id, {
             type: "cart",
           });
-
+          console.log(token);
           setCheckoutToken(token);
-        } catch {
+        } catch (error) {
           if (activeStep !== steps.length) history.push("/");
         }
       };
@@ -54,23 +53,29 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
     nextStep();
   };
 
-  let Confirmation = () => (
-    //   order.customer ? (
-    //   <>
-    //     <div>
-    //       <Typography variant="h5">Thank you for your purchase, {order.customer.firstname} {order.customer.lastname}!</Typography>
-    //       <Divider className={classes.divider} />
-    //       <Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography>
-    //     </div>
-    //     <br />
-    //     <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
-    //   </>
-    // ) : (
-    <div className={classes.spinner}>
-      <CircularProgress />
-    </div>
-    // )
-  );
+  let Confirmation = () =>
+    order.customer ? (
+      <>
+        <div>
+          <Typography variant="h5">
+            Thank you for your purchase, {order.customer.firstname}{" "}
+            {order.customer.lastname}!
+          </Typography>
+          <Divider className={classes.divider} />
+          <Typography variant="subtitle2">
+            Order ref: {order.customer_reference}
+          </Typography>
+        </div>
+        <br />
+        <Button component={Link} variant="outlined" type="button" to="/">
+          Back to home
+        </Button>
+      </>
+    ) : (
+      <div className={classes.spinner}>
+        <CircularProgress />
+      </div>
+    );
 
   if (error) {
     Confirmation = () => (
@@ -112,9 +117,9 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
             Checkout
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map((step) => (
-              <Step key={step}>
-                <StepLabel>{step}</StepLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
